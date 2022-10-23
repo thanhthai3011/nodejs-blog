@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --inspect src/index.js",
     "watch": "node-sass --watch src/resources/scss/ --output src/public/css/",
-    "beautiful": "lint-staged"
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -36,9 +36,7 @@
     "nodemon": "^2.0.20",
     "prettier": "^2.7.1"
   },
-  
   "lint-staged": {
-      "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
-    }
-  
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --tab-width 4 --write"
+  }
 }
