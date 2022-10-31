@@ -1,10 +1,19 @@
 const Course = require('../models/Course');
-const { multipleMongooseToObject } = require('../../../util/mongoose');
+const { multipleMongooseToObject } = require('../../util/mongoose');
 
 class MeController {
     // [GET] /me/stored/courses
     storedCourses(req, res, next) {
-        Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+        let courseQuery = Course.find();
+        let columnSort = req.query.column;
+        let sortType = req.query.type;
+        if (req.query.hasOwnProperty('_sort')) {
+            courseQuery = courseQuery.sort({
+                [columnSort]: sortType,
+            });
+        }
+
+        Promise.all([courseQuery, Course.countDocumentsDeleted()])
             .then(([courses, deletedCount]) =>
                 res.render('me/stored-courses', {
                     deletedCount,

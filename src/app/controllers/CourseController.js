@@ -1,5 +1,5 @@
 const Course = require('../models/Course');
-const { mongooseToObject } = require('../../../util/mongoose');
+const { mongooseToObject } = require('../../util/mongoose');
 
 class CourseController {
     // [GET] /courses/:slug
@@ -66,7 +66,7 @@ class CourseController {
         course
             .save()
             .then(() => res.redirect('/me/stored/courses'))
-            .catch((error) => {});
+            .catch(next);
     }
 
     // [POST] /courses/handle-form-actions
